@@ -21,7 +21,7 @@ BuildRequires:	lib64notify4
 BuildRequires:	python-gobject3
 BuildRequires:	python-dbus
 BuildRequires:	python-proton-vpn-api-core
-BuildRequires:	librsvg2_2
+BuildRequires:	librsvg
 BuildRequires:	python-packaging
 
 Requires:	gtk+3.0
@@ -31,7 +31,7 @@ Requires:	lib64notify4
 Requires:	python-gobject3
 Requires:	python-dbus
 Requires:	python-proton-vpn-api-core
-Requires:	librsvg2_2
+Requires:	librsvg
 Requires:	python-packaging
 Requires:	python-proton-vpn-network-manager
 
