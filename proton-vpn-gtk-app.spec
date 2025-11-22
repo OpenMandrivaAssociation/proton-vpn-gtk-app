@@ -1,12 +1,12 @@
 %define logo_filename proton-vpn-logo.svg
-%define desktop_entry_filename protonvpn-app.desktop
+%define desktop_entry_filename proton.vpn.app.gtk.desktop
 %define upstream_version {upstream_version}
 %define _unpackaged_files_terminate_build 0
 
 Prefix:	%{_prefix}
 
 Name:		proton-vpn-gtk-app
-Version:	4.9.7
+Version:	4.12.0
 Release:	1
 Source0:	https://github.com/ProtonVPN/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	The Proton VPN GTK app is intended for every Proton VPN service user, it provides full access to all functionalities available to authenticated users, with the user signup process handled on the website.
