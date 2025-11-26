@@ -1,3 +1,5 @@
+%global debug_package %{nil}
+
 %define logo_filename proton-vpn-logo.svg
 %define desktop_entry_filename proton.vpn.app.gtk.desktop
 %define upstream_version {upstream_version}
@@ -7,60 +9,54 @@ Prefix:	%{_prefix}
 
 Name:		proton-vpn-gtk-app
 Version:	4.12.0
-Release:	1
+Release:	2
 Source0:	https://github.com/ProtonVPN/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Summary:	The Proton VPN GTK app is intended for every Proton VPN service user, it provides full access to all functionalities available to authenticated users, with the user signup process handled on the website.
+Summary:	Official ProtonVPN Linux app
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
 License:	GPL
 Group:		Networking
 BuildRequires:	desktop-file-utils
-BuildRequires:	lib64python-devel
-BuildRequires:	python-setuptools
-BuildRequires:	gtk+3.0
-BuildRequires:	lib64notify4
+BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(libnotify)
+BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	python-gobject3
-BuildRequires:	python-dbus
-BuildRequires:	python-proton-vpn-api-core
-BuildRequires:	librsvg
-BuildRequires:	python-packaging
+BuildRequires:	python%{pyver}dist(pygobject)
+BuildRequires:	python%{pyver}dist(dbus-python)
+BuildRequires:	python%{pyver}dist(packaging)
+BuildRequires:	python%{pyver}dist(proton-core)
+BuildRequires:	python%{pyver}dist(proton-vpn-api-core)
+BuildRequires:	python%{pyver}dist(proton-vpn-network-manager)
+BuildRequires:	python%{pyver}dist(setuptools)
 
-Requires:	gtk+3.0
-Requires:	lib64gdkx11-gir3.0
-Requires:	lib64notify-gir0.7
-Requires:	lib64notify4
 Requires:	python-gobject3
-Requires:	python-dbus
-Requires:	python-proton-vpn-api-core
-Requires:	librsvg
-Requires:	python-packaging
-Requires:	python-proton-vpn-network-manager
-
-Suggests:	lib64appindicator
-
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
+Requires:	python%{pyver}dist(proton-vpn-network-manager)
 
 %description
-Package: %{name}
+Official ProtonVPN Linux app.
 
-%global debug_package %{nil}
+The Proton VPN GTK app is intended for every Proton VPN service user,
+it provides full access to all functionalities available to authenticated
+users, with the user signup process handled on the website.
+
 
 %prep
-%setup -n %{name}-%{version}
+%autosetup -n %{name}-%{version} -p1
 
 %build
-python3 setup.py build
+%py_build
 
 %install
+%py_install
+
+install -Dm0644 rpmbuild/SOURCES/proton-vpn-logo.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/proton-vpn-logo.svg
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications rpmbuild/SOURCES/%{desktop_entry_filename}
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_entry_filename}
-mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps
-cp rpmbuild/SOURCES/%{logo_filename} %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{logo_filename}
-python3 setup.py install --single-version-externally-managed -O1 --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
 
 %files
-/%{py_sitedir}/proton
-/%{py_sitedir}/proton_vpn_gtk_app-*.egg-info
+%{py_sitedir}/proton
+%{py_sitedir}/proton_vpn_gtk_app-*.egg-info
 %{_bindir}/protonvpn-app
 %{_datadir}/applications/%{desktop_entry_filename}
 %{_datadir}/icons/hicolor/scalable/apps/%{logo_filename}
