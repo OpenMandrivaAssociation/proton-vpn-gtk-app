@@ -8,7 +8,7 @@ Prefix:	%{_prefix}
 
 Name:		proton-vpn-gtk-app
 Version:	4.14.0
-Release:	1
+Release:	2
 Source0:	https://github.com/ProtonVPN/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	Official ProtonVPN Linux app
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
@@ -60,6 +60,7 @@ desktop-file-install --dir=%{buildroot}%{_datadir}/applications rpmbuild/SOURCES
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_entry_filename}
 
 %files
+%license LICENSE COPYING.md
 %{py_sitedir}/proton
 %{py_sitedir}/proton_vpn_gtk_app-*.egg-info
 %{_bindir}/protonvpn-app
