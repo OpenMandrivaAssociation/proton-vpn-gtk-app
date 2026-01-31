@@ -28,11 +28,11 @@ BuildRequires:	python%{pyver}dist(proton-core)
 BuildRequires:	python%{pyver}dist(proton-vpn-api-core)
 BuildRequires:	python%{pyver}dist(setuptools)
 
-Requires:	pkgconfig(gtk+-3.0)
-Requires:	pkgconfig(libnotify)
-Requires:	pkgconfig(librsvg-2.0)
+Requires:	gtk+3.0
 Requires:	lib64gdkx11-gir3.0
 Requires:	lib64notify-gir0.7
+Requires:	lib64notify4
+Requires:	librsvg
 Requires:	python-gobject3
 Requires:	python%{pyver}dist(dbus-python)
 Requires:	python%{pyver}dist(proton-vpn-api-core)
