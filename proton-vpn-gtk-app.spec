@@ -1,10 +1,6 @@
 %global debug_package %{nil}
-
 %define logo_filename proton-vpn-logo.svg
 %define desktop_entry_filename proton.vpn.app.gtk.desktop
-%define _unpackaged_files_terminate_build 0
-
-Prefix:	%{_prefix}
 
 Name:		proton-vpn-gtk-app
 Version:	4.15.1
@@ -14,6 +10,8 @@ Summary:	Official ProtonVPN Linux app
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
 License:	GPL
 Group:		Networking
+
+BuildSystem:  python
 
 #add proton-vpn-daemon to enable split tunneling
 BuildRequires:	desktop-file-utils
@@ -31,9 +29,9 @@ BuildRequires:	python%{pyver}dist(proton-vpn-api-core)
 BuildRequires:	python%{pyver}dist(setuptools)
 
 Requires:	gtk4.0
-Requires:	lib64gdkx11-gir3.0
-Requires:	lib64notify-gir0.7
-Requires:	lib64notify4
+Requires:	%{_lib}gdkx11-gir3.0
+Requires:	%{_lib}notify-gir0.7
+Requires:	%{_lib}notify4
 Requires:	librsvg
 Requires:	python-gobject3
 Requires:	python%{pyver}dist(dbus-python)
@@ -45,15 +43,7 @@ Official ProtonVPN Linux app, intended for every Proton VPN service user,
 it provides full access to all functionalities available to authenticated
 users, with the user signup process handled on the website.
 
-%prep
-%autosetup -n %{name}-%{version} -p1
-
-%build
-%py_build
-
-%install
-%py_install
-
+%install -a
 install -Dm0644 rpmbuild/SOURCES/%{logo_filename} %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{logo_filename}
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications rpmbuild/SOURCES/%{desktop_entry_filename}
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_entry_filename}
