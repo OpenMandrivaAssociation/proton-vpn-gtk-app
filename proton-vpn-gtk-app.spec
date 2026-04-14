@@ -3,7 +3,7 @@
 %define desktop_entry_filename proton.vpn.app.gtk.desktop
 
 Name:		proton-vpn-gtk-app
-Version:	4.15.1
+Version:	4.15.2
 Release:	1
 Source0:	https://github.com/ProtonVPN/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	Official ProtonVPN Linux app
@@ -29,9 +29,8 @@ BuildRequires:	python%{pyver}dist(proton-vpn-api-core)
 BuildRequires:	python%{pyver}dist(setuptools)
 
 Requires:	gtk4.0
-Requires:	%{_lib}gdkx11-gir3.0
-Requires:	%{_lib}notify-gir0.7
-Requires:	%{_lib}notify4
+Requires:	typelib(GdkX11)
+Requires:	typelib(Notify)
 Requires:	librsvg
 Requires:	python-gobject3
 Requires:	python%{pyver}dist(dbus-python)
