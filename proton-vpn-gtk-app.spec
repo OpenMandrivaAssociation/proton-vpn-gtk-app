@@ -3,12 +3,12 @@
 %define desktop_entry_filename proton.vpn.app.gtk.desktop
 
 Name:		proton-vpn-gtk-app
-Version:	4.15.3
+Version:	4.16.1
 Release:	1
-Source0:	https://github.com/ProtonVPN/%{name}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Summary:	Official ProtonVPN Linux app
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
-License:	GPL
+Source0:	%{url}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Summary:	Official ProtonVPN Linux app
+License:	GPLv3
 Group:		Networking
 
 BuildSystem:  python
