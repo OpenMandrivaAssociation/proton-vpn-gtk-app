@@ -8,7 +8,7 @@ Release:	1
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
 Source0:	%{url}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	Official ProtonVPN Linux app
-License:	GPLv3
+License:	GPL-3.0-only
 Group:		Networking
 
 BuildSystem:  python
@@ -18,6 +18,7 @@ BuildRequires:	desktop-file-utils
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	gtk4.0
+BuildRequires:  gettext
 BuildRequires:	pkgconfig(libnotify)
 BuildRequires:	pkgconfig(librsvg-2.0)
 BuildRequires:	python-gobject3
@@ -40,7 +41,7 @@ Requires:	python%{pyver}dist(packaging)
 %description
 Official ProtonVPN Linux app, intended for every Proton VPN service user,
 it provides full access to all functionalities available to authenticated
-users, with the user signup process handled on the website.
+users, with the user sign-up process handled on the website.
 
 %install -a
 install -Dm0644 rpmbuild/SOURCES/%{logo_filename} %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{logo_filename}
