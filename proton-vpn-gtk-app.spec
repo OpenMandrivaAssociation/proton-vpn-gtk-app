@@ -3,7 +3,7 @@
 %define desktop_entry_filename proton.vpn.app.gtk.desktop
 
 Name:		proton-vpn-gtk-app
-Version:	4.17.2
+Version:	4.18.6
 Release:	1
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
 Source0:	%{url}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
@@ -46,6 +46,7 @@ users, with the user sign-up process handled on the website.
 install -Dm0644 rpmbuild/SOURCES/%{logo_filename} %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{logo_filename}
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications rpmbuild/SOURCES/%{desktop_entry_filename}
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_entry_filename}
+
 
 %files
 %license LICENSE COPYING.md
