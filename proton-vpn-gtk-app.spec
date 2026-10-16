@@ -4,7 +4,7 @@
 
 Name:		proton-vpn-gtk-app
 Version:	4.18.6
-Release:	1
+Release:	2
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
 Source0:	%{url}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Summary:	Official ProtonVPN Linux app
