@@ -1,0 +1,8 @@
+// Allow administrators to modify system network connections,
+// needed by Proton VPN kill switch (runs without an auth dialog).
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.NetworkManager.settings.modify.system" &&
+        subject.local && subject.active && subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});

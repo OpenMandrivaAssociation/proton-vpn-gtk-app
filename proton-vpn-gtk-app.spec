@@ -3,17 +3,19 @@
 %define desktop_entry_filename proton.vpn.app.gtk.desktop
 
 Name:		proton-vpn-gtk-app
-Version:	4.19.0
+Version:	4.19.1
 Release:	1
 URL:		https://github.com/ProtonVPN/proton-vpn-gtk-app
 Source0:	%{url}/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+# Allow administrators to modify system network connections,
+# needed by Proton VPN kill switch (runs without an auth dialog).
+Source1:    49-proton-vpn-nm.rules
 Summary:	Official ProtonVPN Linux app
 License:	GPL-3.0-only
 Group:		Networking
 
 BuildSystem:  python
 
-#add proton-vpn-daemon to enable split tunneling
 BuildRequires:	desktop-file-utils
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
@@ -28,14 +30,17 @@ BuildRequires:	python%{pyver}dist(packaging)
 BuildRequires:	python%{pyver}dist(proton-core)
 BuildRequires:	python%{pyver}dist(proton-vpn-api-core)
 BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:  proton-vpn-daemon
 
 Requires:	gtk4.0
+Requires:   fcitx5-gtk4
 Requires:	typelib(GdkX11)
 Requires:	typelib(Notify)
 Requires:	librsvg
 Requires:	python%{pyver}dist(dbus-python)
 Requires:	python%{pyver}dist(proton-vpn-api-core)
 Requires:	python%{pyver}dist(packaging)
+Requires:   proton-vpn-daemon
 
 %description
 Official ProtonVPN Linux app, intended for every Proton VPN service user,
@@ -46,6 +51,7 @@ users, with the user sign-up process handled on the website.
 install -Dm0644 rpmbuild/SOURCES/%{logo_filename} %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{logo_filename}
 desktop-file-install --dir=%{buildroot}%{_datadir}/applications rpmbuild/SOURCES/%{desktop_entry_filename}
 desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_entry_filename}
+install -Dm0644 %{S:1} %{buildroot}%{_datadir}/polkit-1/rules.d/49-proton-vpn-nm.rules
 
 
 %files
@@ -55,3 +61,4 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{desktop_entry_filen
 %{_bindir}/protonvpn-app
 %{_datadir}/applications/%{desktop_entry_filename}
 %{_datadir}/icons/hicolor/scalable/apps/%{logo_filename}
+%{_datadir}/polkit-1/rules.d/49-proton-vpn-nm.rules
